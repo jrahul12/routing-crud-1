@@ -1,0 +1,15 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <button routerLink="post/add" class="btn btn-sm button">Add Post</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-3 mb-3" *ngFor="let post of postArr">
+            <app-post-card [post]="post"></app-post-card>
+        </div>
+    </div>
+</div>

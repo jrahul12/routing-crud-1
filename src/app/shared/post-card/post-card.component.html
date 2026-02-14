@@ -1,0 +1,18 @@
+<div class="card h-100">
+    <div class="card-header">
+        <h3>
+            {{post.title}}
+        </h3>
+    </div>
+    <div class="card-body">
+        <p>
+            {{post.body}}
+        </p>
+    </div>
+    <div class="card-footer">
+        <button class="button1 btn btn-sm btn-block" [routerLink]="['/post', post.postId]">
+            View Details
+        </button>
+
+    </div>
+</div>
