@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../services/post.service';
 import { IPost } from '../model/data';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-post-form',
@@ -19,7 +20,8 @@ export class PostFormComponent implements OnInit {
     private _fb: FormBuilder,
     private _post: PostService,
     private _router: Router,
-    private _routes: ActivatedRoute
+    private _routes: ActivatedRoute,
+    private _snackBar: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class PostFormComponent implements OnInit {
       const createObj: IPost = this.postForm.value;
       this._post.onAdd(createObj).subscribe(() => {
         this._router.navigate(['/']);
+        this._snackBar.snackBar(`Data Added SuccessFully`)
       });
     }
   }
@@ -64,6 +67,7 @@ export class PostFormComponent implements OnInit {
       };
       this._post.onUpdate(updatedObj).subscribe(() => {
         this._router.navigate(['/']);
+        this._snackBar.snackBar(`Data Updated SuccessFully`)
       });
     }
   }

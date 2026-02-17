@@ -11,7 +11,7 @@ import { PostCardComponent } from './shared/post-card/post-card.component';
 import { ConfirmComponent } from './shared/confirm/confirm.component';
 import { PostSingleCardComponent } from './shared/post-single-card/post-single-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
@@ -19,6 +19,9 @@ import { MovieDashboardComponent } from './movie-component/movie-dashboard/movie
 import { MovieFormComponent } from './movie-component/movie-form/movie-form.component';
 import { MovieCardComponent } from './movie-component/movie-card/movie-card.component';
 import { MovieSinleCardComponent } from './movie-component/movie-sinle-card/movie-sinle-card.component';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { AuthInterceptor } from './shared/services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -43,9 +46,17 @@ import { MovieSinleCardComponent } from './movie-component/movie-sinle-card/movi
     MatDialogModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

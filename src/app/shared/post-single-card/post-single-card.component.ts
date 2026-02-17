@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PostService } from '../services/post.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmComponent } from '../confirm/confirm.component';
+import { SnackbarService } from '../services/snackbar.service';
 
 @Component({
   selector: 'app-post-single-card',
@@ -19,7 +20,8 @@ export class PostSingleCardComponent implements OnInit {
     private _routes: ActivatedRoute,
     private _post: PostService,
     private _matDialog: MatDialog,
-    private _router: Router
+    private _router: Router,
+    private _snackBar: SnackbarService
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,7 @@ export class PostSingleCardComponent implements OnInit {
         this._post.onRemove(this.postId).subscribe({
           next: () => {
             this._router.navigate(['/post']);
+            this._snackBar.snackBar(`Post Removed SuccessFully`)
           },
           error: (err) => {
             console.log('Delete failed', err);
